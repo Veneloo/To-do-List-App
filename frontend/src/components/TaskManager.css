@@ -1,0 +1,103 @@
+.task-manager {
+    max-width: 600px;
+    margin: 0 auto;
+    font-family: Arial, sans-serif;
+    text-align: center;
+}
+
+.title {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #4a4a4a;
+    margin-bottom: 10px;
+}
+
+.instruction {
+    font-size: 0.9rem;
+    color: #7a7a7a;
+}
+
+.link-container a {
+    display: inline-block;
+    margin: 10px;
+    color: #260958;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.form-container {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.form-input,
+.form-textarea {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.add-button {
+    background-color: #220357;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.task-list {
+    list-style-type: none;
+    padding: 0;
+}
+
+.task-item {
+    background: #f9f9f9;
+    margin: 10px 0;
+    padding: 15px;
+    border-radius: 5px;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.task-details {
+    text-align: left;
+}
+
+.task-actions button {
+    margin: 5px;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+.edit-button {
+    background-color: #4caf50;
+    color: white;
+}
+
+.delete-button {
+    background-color: #e53935;
+    color: white;
+}
+
+.save-button {
+    background-color: #2196f3;
+    color: white;
+}
+
+.cancel-button {
+    background-color: #9e9e9e;
+    color: white;
+}
+.task-item.completed {
+    text-decoration: line-through;
+    color: gray;
+}
+
+.checkbox {
+    margin-right: 10px;
+}

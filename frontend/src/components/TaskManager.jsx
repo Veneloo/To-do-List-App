@@ -9,7 +9,7 @@ const TaskManager = () => {
     const [editingTaskId, setEditingTaskId] = useState(null);
     const [editingTaskTitle, setEditingTaskTitle] = useState("");
     const [editingTaskDescription, setEditingTaskDescription] = useState("");
-
+    const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
     useEffect(() => {
         const handleVisibilityChange = () => {
             // Re-fetch tasks when the user returns to the app
@@ -58,7 +58,7 @@ const TaskManager = () => {
 
     const toggleCompleted = async (id, completed) => {
         try {
-            const response = await axios.put(`${API_BASE_URL}/api/tasks/${id}/completed`, {
+            const response = await axios.put(`${API_BASE_URL}/tasks/${id}/completed`, {
                 completed: !completed, // Toggle the completed status
             });
             setTasks(tasks.map((task) => (task._id === id ? response.data : task))); // Update task in the state
@@ -69,7 +69,7 @@ const TaskManager = () => {
 
     const deleteTask = async (id) => {
         try {
-            await axios.delete(`${API_BASE_URL}/api/tasks/${id}`);
+            await axios.delete(`${API_BASE_URL}/tasks/${id}`);
             setTasks(tasks.filter((task) => task._id !== id)); // Remove the task from the state
         } catch (error) {
             console.error("Error deleting task:", error);
@@ -84,7 +84,7 @@ const TaskManager = () => {
 
     const saveEdit = async (id) => {
         try {
-            const response = await axios.put(`${API_BASE_URL}/api/tasks/${id}`, {
+            const response = await axios.put(`${API_BASE_URL}/tasks/${id}`, {
                 title: editingTaskTitle,
                 description: editingTaskDescription,
             });
@@ -102,7 +102,7 @@ const TaskManager = () => {
         setEditingTaskTitle("");
         setEditingTaskDescription("");
     };
-    const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
+
 
     useEffect(() => {
     axios.get(`${API_BASE_URL}/tasks`)

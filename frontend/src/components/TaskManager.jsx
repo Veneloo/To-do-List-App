@@ -33,7 +33,7 @@ const TaskManager = () => {
 
     const fetchTasks = async () => {
         try {
-            const response = await axios.get("http://localhost:5000/api/tasks");
+            const response = await axios.get(`${process.env.REACT_APP_API_BASE_URL}/tasks`);
             setTasks(response.data);
         } catch (error) {
             console.error("Error fetching tasks:", error);
@@ -43,7 +43,7 @@ const TaskManager = () => {
     const addTask = async () => {
         if (newTaskTitle.trim()) {
             try {
-                const response = await axios.post("http://localhost:5000/api/tasks", {
+                const response = await axios.post(`${process.env.REACT_APP_API_BASE_URL}/tasks`, {
                     title: newTaskTitle,
                     description: newTaskDescription,
                 });
@@ -58,7 +58,7 @@ const TaskManager = () => {
 
     const toggleCompleted = async (id, completed) => {
         try {
-            const response = await axios.put(`http://localhost:5000/api/tasks/${id}/completed`, {
+            const response = await axios.put(`${API_BASE_URL}/api/tasks/${id}/completed`, {
                 completed: !completed, // Toggle the completed status
             });
             setTasks(tasks.map((task) => (task._id === id ? response.data : task))); // Update task in the state
@@ -69,7 +69,7 @@ const TaskManager = () => {
 
     const deleteTask = async (id) => {
         try {
-            await axios.delete(`http://localhost:5000/api/tasks/${id}`);
+            await axios.delete(`${API_BASE_URL}/api/tasks/${id}`);
             setTasks(tasks.filter((task) => task._id !== id)); // Remove the task from the state
         } catch (error) {
             console.error("Error deleting task:", error);
@@ -84,7 +84,7 @@ const TaskManager = () => {
 
     const saveEdit = async (id) => {
         try {
-            const response = await axios.put(`http://localhost:5000/api/tasks/${id}`, {
+            const response = await axios.put(`${API_BASE_URL}/api/tasks/${id}`, {
                 title: editingTaskTitle,
                 description: editingTaskDescription,
             });
@@ -102,6 +102,18 @@ const TaskManager = () => {
         setEditingTaskTitle("");
         setEditingTaskDescription("");
     };
+    const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
+
+    useEffect(() => {
+    axios.get(`${API_BASE_URL}/tasks`)
+        .then((response) => {
+        console.log(response.data);
+        })
+        .catch((error) => {
+        console.error("Error fetching tasks:", error);
+        });
+    }, [API_BASE_URL]);
+
 
     return (
         <div className="task-manager">
@@ -109,16 +121,16 @@ const TaskManager = () => {
             <p className="instruction">* Please click one of the links to start the backend</p>
 
             <div className="link-container">
-                <a href="http://localhost:5000/api/tasks" target="_blank" rel="noopener noreferrer">
+                <a href={`${API_BASE_URL}/tasks`} target="_blank" rel="noopener noreferrer">
                     View All Posts
                 </a>
-                <a href="http://localhost:5000/api/tasks/examples/create" target="_blank" rel="noopener noreferrer">
+                <a href={`${API_BASE_URL}/tasks/examples/create`} target="_blank" rel="noopener noreferrer">
                     Create Post
                 </a>
-                <a href="http://localhost:5000/api/tasks/examples/edit" target="_blank" rel="noopener noreferrer">
+                <a href={`${API_BASE_URL}/tasks/examples/edit`} target="_blank" rel="noopener noreferrer">
                     Edit Post
                 </a>
-                <a href="http://localhost:5000/api/tasks/examples/delete" target="_blank" rel="noopener noreferrer">
+                <a href={`${API_BASE_URL}/tasks/examples/delete`} target="_blank" rel="noopener noreferrer">
                     Delete Post
                 </a>
             </div>

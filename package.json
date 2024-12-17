@@ -1,7 +1,7 @@
 {
     "scripts": {
       "start": "concurrently \"npm run server\" \"npm run client\"",
-      "server": "cd backend && npm run dev",
+      "server": "cd api && npm run dev",
       "client": "cd frontend && npm start"
     },
     "devDependencies": {
